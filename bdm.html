@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Business Data Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background: #cfd8dc;
+      color: #111;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #eceff1;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-shadow: 1px 1px #aaa;
+    }
+    h2 {
+      font-size: 1.2rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 8px;
+      margin-top: 40px;
+      font-weight: 700;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .item {
+      margin: 20px 0 10px 0;
+      font-weight: 500;
+    }
+    .deadline-box {
+      background: #ffcdd2;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-top: 8px;
+      display: block;
+      width: fit-content;
+    }
+    ul {
+      padding-left: 20px;
+      list-style-type: none;
+    }
+    ul li {
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 10px;
+    }
+    .formula {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 40px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .formula code {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Business Data Management
+    </h1>
+
+    <div class="section">
+      <h2>Major Assessments</h2>
+      <div class="item">Quiz 1: No Quiz 1 </div>
+      <div class="item">Quiz 2: August 03, 2025 (Sunday, 2:00 PM) <div class="deadline-box" id="quiz2-timer"></div></div>
+
+      <div class="item">End Term: August 31, 2025 (Sunday, 9:00 AM) <div class="deadline-box" id="endterm-timer"></div></div>
+      <p class="note">Above to be attended in person at designated centres.</p>
+    </div>
+
+
+
+
+
+
+  <script>
+    const deadlines = {
+      'quiz2':'2025-08-03',
+      'endterm': '2025-08-31T09:00:00',
+    };
+
+    function updateTimer(id, deadline) {
+      const el = document.getElementById(id);
+      function tick() {
+        const now = new Date();
+        const due = new Date(deadline);
+        const diff = due - now;
+
+        if (diff <= 0) {
+          el.innerHTML = 'DEADLINE PASSED';
+          el.style.background = '#ef9a9a';
+          el.style.color = '#b71c1c';
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        el.innerHTML = `${d}d ${h}h ${m}m ${s}s remaining`;
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    Object.entries(deadlines).forEach(([key, time]) => {
+      updateTimer(`${key}-timer`, time);
+    });
+  </script>
+</body>
+</html>

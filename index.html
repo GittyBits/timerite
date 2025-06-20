@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background: #eceff1;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+    h1::before {
+      content: "📚 ";
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .card {
+      background: #f5f5f5;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      margin-top: 0;
+    }
+    .deadlines-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .deadline-box {
+      font-size: 0.85rem;
+      background: #ffcdd2;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      margin: 2px 0;
+      font-weight: 500;
+    }
+    .deadline-box.urgent {
+      background: #ff5252;
+      color: white;
+    }
+    .deadline-box.today {
+      background: #ff1744;
+      color: white;
+      animation: pulse 2s infinite;
+    }
+    .no-deadlines {
+      font-size: 0.9rem;
+      background: #c8e6c9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: #2e7d32;
+      font-weight: 500;
+    }
+    .footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1></h1>
+  <div class="grid">
+    <div class="card">
+      <a href="mlt.html">
+        <h2>Machine Learning Techniques</h2>
+        <div class="deadlines-container" id="mlt-deadlines"></div>
+      </a>
+    </div>
+    <div class="card">
+      <a href="sc.html">
+        <h2>System Commands</h2>
+        <div class="deadlines-container" id="sc-deadlines"></div>
+      </a>
+    </div>  
+    <div class="card">
+      <a href="java.html">
+        <h2>Programming concepts using Java
+</h2>
+        <div class="deadlines-container" id="java-deadlines"></div>
+      </a>
+    </div>
+    <div class="card">
+      <a href="bdm.html">
+        <h2>Business Analytics</h2>
+        <div class="deadlines-container" id="bdm-deadlines"></div>
+      </a>
+    </div>
+  </div>
+  <div class="footer">
+    Updated June 2025 — Tap into each course for countdowns, eligibility & assessment breakdown.<br>
+    <small>Dashboard updates every minute • Deadlines shown for next 7 days</small>
+  </div>
+
+  <script>
+    // Complete deadline data for all subjects
+    const deadlines = {
+      sc: {
+        'quiz1': '2025-07-13T14:00:00',
+        'oppe1': '2025-08-16T23:59:59',
+        'endterm': '2025-08-31T09:00:00',
+        'week1': '2025-05-25T23:59:59',
+        'week2': '2025-05-25T23:59:59',
+        'week3': '2025-06-22T23:59:59',
+        'week4': '2025-06-29T23:59:59',
+        'week5': '2025-07-06T23:59:59',
+        'week6': '2025-07-20T23:59:59',
+        'week7': '2025-07-27T23:59:59',
+        'week8': '2025-07-29T23:59:59',
+        'week9': '2025-08-10T23:59:59',
+        'week10': '2025-08-12T23:59:59',
+        'week11': '2025-08-24T23:59:59',
+        'week12': '2025-08-24T23:59:59',
+        'bpt1': '2025-05-23T23:59:59',
+        'bpt2': '2025-06-27T23:59:59',
+        'bpt3': '2025-07-11T23:59:59',
+        'bpt4': '2025-08-01T23:59:59'
+      },
+      java: {
+        'quiz1': '2025-07-13T14:00:00',
+        'oppe1': '2025-07-20T23:59:59',
+        'quiz2': '2025-08-03T14:00:00',
+        'oppe2': '2025-08-17T23:59:59',
+        'endterm': '2025-08-31T09:00:00',
+        'week1': '2025-05-25T23:59:59',
+        'week2': '2025-05-25T23:59:59',
+        'week3': '2025-06-22T23:59:59',
+        'week4': '2025-06-29T23:59:59',
+        'week5': '2025-07-06T23:59:59',
+        'week6': '2025-07-20T23:59:59',
+        'week7': '2025-07-27T23:59:59',
+        'week8': '2025-07-29T23:59:59',
+        'week9': '2025-08-10T23:59:59',
+        'week10': '2025-08-12T23:59:59',
+        'week11': '2025-08-24T23:59:59',
+        'week12': '2025-08-24T23:59:59',
+        'bpt1': '2025-05-23T23:59:59',
+        'bpt2': '2025-06-27T23:59:59',
+        'bpt3': '2025-07-11T23:59:59',
+        'bpt4': '2025-08-01T23:59:59'
+      },
+      mlt: {
+        'quiz1': '2025-07-13T14:00:00',
+        'quiz2': '2025-08-03T14:00:00',
+        'endterm': '2025-08-31T09:00:00',
+        'week1': '2025-05-25T23:59:59',
+        'week2': '2025-05-25T23:59:59',
+        'week3': '2025-06-22T23:59:59',
+        'week4': '2025-06-29T23:59:59',
+        'week5': '2025-07-06T23:59:59',
+        'week6': '2025-07-20T23:59:59',
+        'week7': '2025-07-27T23:59:59',
+        'week8': '2025-07-29T23:59:59',
+        'week9': '2025-08-10T23:59:59',
+        'week10': '2025-08-12T23:59:59',
+        'week11': '2025-08-24T23:59:59',
+        'week12': '2025-08-24T23:59:59'
+      },
+      bdm: {
+        'quiz2': '2025-08-03T23:59:59',
+        'endterm': '2025-08-31T09:00:00',
+      }
+    };
+
+    function formatDeadlineName(name) {
+      // Convert deadline names to more readable format
+      const nameMap = {
+        'quiz1': 'Quiz 1',
+        'quiz2': 'Quiz 2',
+        'oppe1': 'OPPE 1',
+        'oppe2': 'OPPE 2',
+        'endterm': 'End Term',
+        'bpt1': 'BPT 1',
+        'bpt2': 'BPT 2',
+        'bpt3': 'BPT 3',
+        'bpt4': 'BPT 4'
+      };
+      
+      if (nameMap[name]) return nameMap[name];
+      if (name.startsWith('week')) return `Week ${name.slice(4)}`;
+      return name.toUpperCase();
+    }
+
+    function getTimeRemaining(deadline) {
+      const now = new Date();
+      const diff = deadline - now;
+      
+      if (diff <= 0) return 'Expired';
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      if (days > 0) return `${days}d ${hours}h`;
+      if (hours > 0) return `${hours}h ${minutes}m`;
+      return `${minutes}m`;
+    }
+
+    function getUpcomingDeadlines(subjectDeadlines) {
+      const now = new Date();
+      const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+      
+      return Object.entries(subjectDeadlines)
+        .map(([name, dateStr]) => {
+          const date = new Date(dateStr);
+          return { name, date, timeRemaining: getTimeRemaining(date) };
+        })
+        .filter(entry => entry.date >= now && entry.date <= sevenDaysFromNow && entry.timeRemaining !== 'Expired')
+        .sort((a, b) => a.date - b.date);
+    }
+
+    function getDeadlineClass(deadline) {
+      const now = new Date();
+      const diff = deadline.date - now;
+      const hoursRemaining = diff / (1000 * 60 * 60);
+      
+      if (hoursRemaining <= 24) return 'today';
+      if (hoursRemaining <= 48) return 'urgent';
+      return '';
+    }
+
+    function updateDeadlines() {
+      Object.keys(deadlines).forEach(subject => {
+        const container = document.getElementById(`${subject}-deadlines`);
+        if (!container) return;
+        
+        container.innerHTML = '';
+        const upcoming = getUpcomingDeadlines(deadlines[subject]);
+        
+        if (upcoming.length === 0) {
+          const noDeadlines = document.createElement('div');
+          noDeadlines.className = 'no-deadlines';
+          noDeadlines.textContent = 'No upcoming deadlines';
+          container.appendChild(noDeadlines);
+        } else {
+          upcoming.forEach(deadline => {
+            const box = document.createElement('div');
+            box.className = `deadline-box ${getDeadlineClass(deadline)}`;
+            
+            const deadlineName = formatDeadlineName(deadline.name);
+            const formattedDate = deadline.date.toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric'
+            });
+            
+            box.innerHTML = `
+              <strong>${deadlineName}</strong><br>
+              ${formattedDate} (${deadline.timeRemaining})
+            `;
+            container.appendChild(box);
+          });
+        }
+      });
+    }
+
+    // Initial update
+    updateDeadlines();
+    
+    // Update every minute to keep time remaining accurate
+    setInterval(updateDeadlines, 60000);
+    
+    // Update every 10 seconds for more responsive time display
+    setInterval(() => {
+      document.querySelectorAll('.deadline-box:not(.no-deadlines)').forEach(box => {
+        const subject = box.closest('.card').querySelector('h2').textContent;
+        const subjectKey = {
+          'Machine Learning Techniques': 'mlt',
+          'System Commands': 'sc',
+          'Business Analytics': 'bdm',
+          'Java Programming': 'java'
+        }[subject];
+        
+        if (subjectKey) {
+          const upcoming = getUpcomingDeadlines(deadlines[subjectKey]);
+          const index = Array.from(box.parentNode.children).indexOf(box);
+          if (upcoming[index]) {
+            const deadline = upcoming[index];
+            const deadlineName = formatDeadlineName(deadline.name);
+            const formattedDate = deadline.date.toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric'
+            });
+            
+            box.innerHTML = `
+              <strong>${deadlineName}</strong><br>
+              ${formattedDate} (${getTimeRemaining(deadline.date)})
+            `;
+            
+            // Update urgency class
+            box.className = `deadline-box ${getDeadlineClass(deadline)}`;
+          }
+        }
+      });
+    }, 10000);
+  </script>
+</body>
+</html>

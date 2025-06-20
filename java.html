@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Programming concepts using Java
+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background: #cfd8dc;
+      color: #111;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #eceff1;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-shadow: 1px 1px #aaa;
+    }
+    h2 {
+      font-size: 1.2rem;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 8px;
+      margin-top: 40px;
+      font-weight: 700;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .item {
+      margin: 20px 0 10px 0;
+      font-weight: 500;
+    }
+    .deadline-box {
+      background: #ffcdd2;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-top: 8px;
+      display: block;
+      width: fit-content;
+    }
+    ul {
+      padding-left: 20px;
+      list-style-type: none;
+    }
+    ul li {
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 10px;
+    }
+    .formula {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 40px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .formula code {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Programming concepts using Java</h1>
+
+    <div class="section">
+      <h2>Major Assessments</h2>
+      <div class="item">Quiz 1: July 13 2025  <div class="deadline-box" id="quiz1-timer"></div></div>
+      <div class="item">Oppe 1: July 20 2025(W2-W6) <div class="deadline-box" id="oppe1-timer"></div></div>
+      <div class="item">Quiz 2: August 03 2025 <div class="deadline-box" id="quiz2-timer"></div></div>
+      <div class="item">Oppe 2: August 17 2025(W2-W9) <div class="deadline-box" id="oppe2-timer"></div></div>
+
+      <div class="item">End Term: August 31, 2025 (Sunday, 9:00 AM) <div class="deadline-box" id="endterm-timer"></div></div>
+      <p class="note">Above to be attended in person at designated centres.</p>
+    </div>
+
+    <div class="section">
+      <h2>Weekly Assignment Deadlines </h2>
+      <ul>
+        <li>Week 1: May 25, 2025 (Sunday) <div class="deadline-box" id="week1-timer"></div></li>
+        <li>Week 2: May 25, 2025 (Sunday) <div class="deadline-box" id="week2-timer"></div></li>
+        <li>Week 3: June 22, 2025 (Sunday) <div class="deadline-box" id="week3-timer"></div></li>
+        <li>Week 4: June 29, 2025 (Sunday) <div class="deadline-box" id="week4-timer"></div></li>
+        <li>Week 5: July 6, 2025 (Sunday) <div class="deadline-box" id="week5-timer"></div></li>
+        <li>Week 6: July 20, 2025 (Sunday) <div class="deadline-box" id="week6-timer"></div></li>
+        <li>Week 7: July 27, 2025 (Sunday) <div class="deadline-box" id="week7-timer"></div></li>
+        <li>Week 8: July 29, 2025 (Tuesday) <div class="deadline-box" id="week8-timer"></div></li>
+        <li>Week 9: August 10, 2025 (Sunday) <div class="deadline-box" id="week9-timer"></div></li>
+        <li>Week 10: August 12, 2025 (Tuesday) <div class="deadline-box" id="week10-timer"></div></li>
+        <li>Week 11: August 24, 2025 (Sunday) <div class="deadline-box" id="week11-timer"></div></li>
+        <li>Week 12: August 24, 2025 (Sunday) <div class="deadline-box" id="week12-timer"></div></li>
+      </ul>
+    </div>
+
+    <!-- Eligibility & formula -->
+    <div class="formula">
+      <h2>Eligibility Criteria</h2>
+      <ul>
+        <li><strong>OPPE&nbsp;1:</strong> Finish the <a href="#">OPPE System Compatibility Test (SCT)</a> &nbsp;and&nbsp; score&nbsp;≥ 40/100 in <strong>A2, A3, A4</strong></li>
+        <li><strong>OPPE&nbsp;2:</strong> SCT complete <em>and</em> <strong>A5–A8 ≥ 40/100</strong> <br>plus&nbsp;average of best 5 of first 7 weekly assessments ≥ 40/100</li>
+        <li><strong>End Term Exam:</strong> Best 5/7 weekly assessments ≥ 40/100 <em>and</em> at least one quiz attended at the centre</li>
+        <li><strong>Course Grade:</strong> Must attend End Term <em>and</em> score&nbsp;≥ 30 % in either programming exam (PE1 or PE2)</li>
+      </ul>
+
+      <h2>Score Calculation</h2>
+      <code>GAA = Average of best 6 out of 7 programming assignments</code>
+      <code>Final&nbsp;Score&nbsp;T = 0.1 GAA + 0.3 F + 0.2 Max(PE1, PE2) + 0.10 Min(PE1, PE2) + Max(0.25 Max(Qz1, Qz2), 0.15 Qz1 + 0.25 Qz2)</code>
+      <p class="note">Score capped at 100.</p>
+    </div>
+  </div>
+
+  <script>
+    const deadlines = {
+      'quiz1': '2025-07-13T14:00:00',
+      'oppe1':'2025-07-20',
+      'quiz2':'2025-08-03T14:00:00',
+      'oppe2':'2025-08-17',
+      'endterm': '2025-08-31T09:00:00',
+      'week1': '2025-05-25T23:59:59',
+      'week2': '2025-05-25T23:59:59',
+      'week3': '2025-06-22T23:59:59',
+      'week4': '2025-06-29T23:59:59',
+      'week5': '2025-07-06T23:59:59',
+      'week6': '2025-07-20T23:59:59',
+      'week7': '2025-07-27T23:59:59',
+      'week8': '2025-07-29T23:59:59',
+      'week9': '2025-08-10T23:59:59',
+      'week10': '2025-08-12T23:59:59',
+      'week11': '2025-08-24T23:59:59',
+      'week12': '2025-08-24T23:59:59',
+      'bpt1': '2025-05-23T23:59:59',
+      'bpt2': '2025-06-27T23:59:59',
+      'bpt3': '2025-07-11T23:59:59',
+      'bpt4': '2025-08-01T23:59:59'
+    };
+
+    function updateTimer(id, deadline) {
+      const el = document.getElementById(id);
+      function tick() {
+        const now = new Date();
+        const due = new Date(deadline);
+        const diff = due - now;
+
+        if (diff <= 0) {
+          el.innerHTML = 'DEADLINE PASSED';
+          el.style.background = '#ef9a9a';
+          el.style.color = '#b71c1c';
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        el.innerHTML = `${d}d ${h}h ${m}m ${s}s remaining`;
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    Object.entries(deadlines).forEach(([key, time]) => {
+      updateTimer(`${key}-timer`, time);
+    });
+  </script>
+</body>
+</html>
